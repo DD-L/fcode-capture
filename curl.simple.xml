@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- tips: 数据中的 '&' '<' '>' 等字符需要转义, 如&amp; 等 -->
+<root>
+
+	<instance id="01"> <!-- id是instance的唯一标识 -->
+		<!-- instance的名字，增强友好性 -->
+		<name>@我的微博 的首页</name> 
+		<!-- curl命令. 最好加上超时参数，如'- -connect-timeout 10 -m 20'; 但是不要加"压缩" - -compressed 选项. (两个'-'相连，这里分开写是为了避免和xml注释冲突) -->
+		<curl> 
+			curl --connect-timeout 10 -m 20 'http://weibo.cn/?tf=5_009' -H 'Host: weibo.cn' -H 'User-Agent: Mozilla/5.0 (Windows NT 6.1; rv:32.0) Gecko/20100101 Firefox/32.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Accept-Language: zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3' -H 'Accept-Encoding: gzip, deflate' -H 'Referer: http://weibo.cn/' -H 'Cookie: _T_WM=xxxxxxxx; SUB=xxxxxxxxx..; gsid_CTandWM=xxxxxxx' -H 'Connection: keep-alive'
+		</curl>
+		<!-- 要截取的正则表达式 -->
+		<regex>XMSH.{17}.*?收藏.{5,28}来自</regex>
+		<!-- interval[可选节点]: 重复抓取的时间间隔(秒), 默认30 -->
+		<interval>30</interval>
+		<!-- callback[可选节点]: 工作结束时需要调用的命令 -->
+		<callback>
+			cmd /c "C:\Program Files\Internet Explorer\iexplore.exe" http://order.mi.com/queue/f2code
+		</callback>
+		<!-- 这里借助cmd来调用IE, 而不是直接启动IE, 是出于cmd.exe比IE启动速度要快很多的考量, 这样可以使警报声更早一点发出 -->
+	</instance>
+
+	<instance id="02">
+		<name>@某某 的微博</name>
+		<curl>
+			curl --connect-timeout 10 -m 20  'http://weibo.cn/xxxxxxxxx/profile' -H 'Host: weibo.cn' -H 'User-Agent: Mozilla/5.0 (Windows NT 6.1; rv:32.0) Gecko/20100101 Firefox/32.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Accept-Language: zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3' -H 'Accept-Encoding: gzip, deflate' -H 'Referer: http://weibo.cn/?tf=5_009' -H 'Cookie: _T_WM=xxxxxxxxx; SUB=_xxxxxxx..; gsid_CTandWM=xxxxxxxx' -H 'Connection: keep-alive'
+		</curl>
+		<regex>XMSH.{17}.*?收藏.{5,28}来自</regex>
+		<interval>40</interval>
+		<callback>
+			cmd /c "C:\Program Files\Internet Explorer\iexplore.exe" http://order.mi.com/queue/f2code
+		</callback>
+	</instance>
+
+	<instance id="03">
+		<name>微博搜索"XMSH",来自@我的微博</name>
+		<curl>
+			curl --connect-timeout 10 -m 20 'http://weibo.cn/search/?pos=search' -H 'Host: weibo.cn' -H 'User-Agent: Mozilla/5.0 (Windows NT 6.1; rv:32.0) Gecko/20100101 Firefox/32.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Accept-Language: zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3' -H 'Accept-Encoding: gzip, deflate' -H 'Referer: http://weibo.cn/search/?tf=5_012' -H 'Cookie: _T_WM=xxxxx; SUB=_xxxxxxxxx..; gsid_CTandWM=xxxxxxxxx' -H 'Connection: keep-alive' -H 'Content-Type: application/x-www-form-urlencoded' --data 'keyword=XMSH&amp;smblog=%E6%90%9C%E5%BE%AE%E5%8D%9A'
+		</curl>
+		<regex>XMSH.{17}.*?收藏.{5,28}来自</regex>
+		<interval>11</interval>
+		<callback>
+			cmd /c "C:\Program Files\Internet Explorer\iexplore.exe" http://order.mi.com/queue/f2code
+		</callback>
+	</instance>
+
+	<instance id="04">
+		<name>来自@神得强Steven</name>
+		<curl>
+			curl --connect-timeout 10 -m 20 "http://weibo.cn/shendeqiang" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Connection: keep-alive" -H "Accept-Encoding: gzip, deflate, sdch" -H "Cookie: _T_WM=xxxxxxx; SUB=_xxxxxxxQ..; SUBP=xxxxxx; SUHB=xxxxxx; gsid_CTandWM=xxxxxx; SUE=xxxxxx; SUP=xxxxxxx; SUS=xxxxxxx; SSOLoginState=xxxxxxxx" -H "Accept-Language: zh-CN,zh;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36"
+		</curl>
+		<regex>XMSH.{17}.*?收藏.{5,28}来自</regex>
+		<interval>40</interval>
+		<callback>
+			cmd /c "C:\Program Files\Internet Explorer\iexplore.exe" http://order.mi.com/queue/f2code
+		</callback>
+	</instance>
+
+	<instance id="04">
+		<name>@曲阳</name>
+		<curl>
+			curl --connect-timeout 10 -m 20 'http://weibo.cn/u/5251446401' -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Connection: keep-alive" -H "Accept-Encoding: gzip, deflate, sdch" -H "Cookie: _T_WM=xxxxxxx; SUB=_xxxxxxxQ..; SUBP=xxxxxx; SUHB=xxxxxx; gsid_CTandWM=xxxxxx; SUE=xxxxxx; SUP=xxxxxxx; SUS=xxxxxxx; SSOLoginState=xxxxxxxx" -H "Accept-Language: zh-CN,zh;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36"
+		</curl>
+		<regex>XMSH.{17}.*?收藏.{5,28}来自</regex>
+		<interval>40</interval>
+		<callback>
+			cmd /c "C:\Program Files\Internet Explorer\iexplore.exe" http://order.mi.com/queue/f2code
+		</callback>
+	</instance>
+</root>

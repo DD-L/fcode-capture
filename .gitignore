@@ -1,0 +1,8 @@
+/test/
+
+__pycache__
+*.pyc
+
+*.bak
+*.py.code
+*.old

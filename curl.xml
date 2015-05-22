@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- tips: 数据中的 '&' '<' '>' 等字符需要转义, 如&amp; 等 -->
+<root>
+
+	<instance id="01"> <!-- id是instance的唯一标识 -->
+		<!-- instance的名字，增强友好性 -->
+		<name>@我的微博 的首页</name> 
+		<!-- curl命令. 最好加上超时参数，如'- -connect-timeout 10 -m 20'; 但是不要加"压缩" - -compressed 选项. (两个'-'相连，这里分开写是为了避免和xml注释冲突) -->
+		<curl> 
+			curl --connect-timeout 10 -m 20 "http://weibo.cn/" -H "Accept-Encoding: gzip, deflate, sdch" -H "Accept-Language: zh-CN,zh;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cache-Control: max-age=0" -H "Cookie:xxxxxxxxx; SUB=xxxxxxx..; SUBP=xxxxxxxx; SUHB=xxxxxxxxx; gsid_CTandWM=xxxxxxxx; SUE=xxxxxxx; SUP=xxxxxx; SUS=xxxxxx; SSOLoginState=xxxxxxx" -H "Connection: keep-alive"
+		</curl>
+		<!-- 要截取的正则表达式 -->
+		<regex>XMXP.{17}.*?收藏.{5,28}来自</regex>
+		<!-- interval[可选节点]: 重复抓取的时间间隔(秒), 默认30 -->
+		<interval>30</interval>
+		<!-- callback[可选节点]: 工作结束时需要调用的命令 -->
+		<callback>
+			cmd /c "C:\Program Files\Internet Explorer\iexplore.exe" http://order.mi.com/queue/f2code
+		</callback>
+		<!-- 这里借助cmd来调用IE, 而不是直接启动IE, 是出于cmd.exe比IE启动速度要快很多的考量, 这样可以使警报声更早一点发出 -->
+	</instance>
+
+	<instance id="02">
+		<name>@微博搜索"XMXP",来自@我的微博</name>
+		<curl>
+			curl --connect-timeout 10 -m 20 "http://weibo.cn/search/?pos=search" -H "Cookie: _T_WM=xxxxxx; SUB=_xxxxxxx..; SUBP=xxxxxxxx; SUHB=xxxxx; gsid_CTandWM=xxxxxx; SUE=xxxxxxxxx; SUP=xxxxxxx; SUS=xxxxxx" -H "Origin: http://weibo.cn" -H "Accept-Encoding: gzip, deflate" -H "Accept-Language: zh-CN,zh;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" -H "Cache-Control: max-age=0" -H "Referer: http://weibo.cn/search/?tf=5_012" -H "Connection: keep-alive" --data "keyword=XMXP&amp;smblog="%"E6"%"90"%"9C"%"E5"%"BE"%"AE"%"E5"%"8D"%"9A"
+		</curl>
+		<regex>XMXP.{17}.*?收藏.{5,28}来自</regex>
+		<interval>35</interval>
+		<callback>
+			cmd /c "C:\Program Files\Internet Explorer\iexplore.exe" http://order.mi.com/queue/f2code
+		</callback>
+	</instance>
+
+	<instance id="03">
+		<name>来自@小米粉丝后援会</name>
+		<curl>
+			curl --connect-timeout 10 -m 20 
+		</curl>
+		<regex>XMXP.{17}.*?收藏.{5,28}来自</regex>
+		<interval>11</interval>
+		<callback>
+			cmd /c "C:\Program Files\Internet Explorer\iexplore.exe" http://order.mi.com/queue/f2code
+		</callback>
+	</instance>
+
+	<instance id="04">
+		<name>来自@神得强Steven</name>
+		<curl>
+			curl --connect-timeout 10 -m 20 
+		</curl>
+		<regex>XMXP.{17}.*?收藏.{5,28}来自</regex>
+		<interval>40</interval>
+		<callback>
+			cmd /c "C:\Program Files\Internet Explorer\iexplore.exe" http://order.mi.com/queue/f2code
+		</callback>
+	</instance>
+
+	<instance id="05">
+		<name>来自@渠洋</name>
+		<curl>
+			curl --connect-timeout 10 -m 20  
+		</curl>
+		<regex>XMXP.{17}.*?收藏.{5,28}来自</regex>
+		<interval>40</interval>
+		<callback>
+			cmd /c "C:\Program Files\Internet Explorer\iexplore.exe" http://order.mi.com/queue/f2code
+		</callback>
+	</instance>
+
+	<instance id="06">
+		<name>temp1</name>
+		<curl>
+			curl --connect-timeout 10 -m 20 
+		</curl>
+		<regex>XMXP.{17}.*?收藏.{5,28}来自</regex>
+		<interval>1</interval>
+		<callback>
+		</callback>
+	</instance>
+</root>
